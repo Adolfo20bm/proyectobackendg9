@@ -1,5 +1,6 @@
 from config import conexion
 from sqlalchemy import Column, types
+from datetime import datetime
 
 class CategoriaModel(conexion.Model):
     __tablename__='categorias'
