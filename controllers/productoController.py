@@ -5,6 +5,19 @@ from models.categorias import CategoriaModel
 from dtos.productoDto import ProductoRequestDto
 
 class ProductosController(Resource):
+    def get(self):
+        
+        productos = conexion.session.query(ProductoModel).all()
+
+        serializador = ProductoRequestDto(many=True)
+    
+        data = serializador.dump(productos)
+    
+        return {
+            'message': 'Los productos son:',
+            'content': data
+        }
+
     def post(self):
         body = request.get_json()
         try:
