@@ -55,3 +55,36 @@ class ProductoController(Resource):
             'message': 'Los productos son',
             'content': data
         }
+    
+    def put(self, id):
+        try:
+            productoEncontrado = conexion.session.query(ProductoModel).filter_by(id=id).first()
+
+            if productoEncontrado is None:
+                raise Exception('Producto no existe')
+            
+            body = request.get_json()
+            serializador = ProductoRequestDto()
+            data = serializador.load(body)
+
+            # aca sobreescribimos la informacion nueva del Categoria
+            productoEncontrado.descripcion = data.get('descripcion')
+            productoEncontrado.unidad = data.get('unidad')
+            productoEncontrado.imagen = data.get('imagen')
+            productoEncontrado.stock = data.get('stock')
+            productoEncontrado.entregas = data.get('entregas')
+            productoEncontrado.fecha = data.get('fecha')
+            productoEncontrado.cod_patrimonial = data.get('cod_patrimonial')
+            productoEncontrado.categoriaId = data.get('categoriaId')
+
+            conexion.session.commit()
+
+            return {
+                'message':'Producto actualizado exitosamente'
+            }
+
+        except Exception as error:
+            return {
+                'message': 'Error al actualizar el Producto',
+                'content': error.args
+            }
