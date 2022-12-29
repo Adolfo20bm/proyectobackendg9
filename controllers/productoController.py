@@ -89,3 +89,24 @@ class ProductoController(Resource):
                 'message': 'Error al actualizar el Producto',
                 'content': error.args
             }
+
+    def delete(self, id):
+            try:
+                # Buscamos el usuario
+                productoEncontrado = conexion.session.query(ProductoModel).filter_by(id=id).first()
+                # Si no hay el usuario emitimos un error
+                if productoEncontrado is None:
+                    raise Exception('Producto no existe')
+                # asi eliminamos el usuario de la base de datos
+                conexion.session.delete(productoEncontrado)
+                # aqui confirmamos la eliminacion de manera permanente
+                conexion.session.commit()
+                return {
+                    'message': 'El producto se elimino exitosamente'
+                }
+
+            except Exception as error:
+                return {
+                    'message': 'Error al eliminar el Producto',
+                    'content': error.args
+                }
