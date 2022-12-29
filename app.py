@@ -22,6 +22,7 @@ migrate = Migrate(app, conexion)
 api.add_resource(CategoriasController, '/categorias')
 api.add_resource(CategoriaController, '/categoria/<int:id>')
 api.add_resource(ProductosController, '/productos')
+api.add_resource(ProductoController, '/producto/<int:id>')
 api.add_resource(ProductoController, '/producto/<int:categoriaId>')
 
 if __name__ == '__main__':

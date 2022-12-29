@@ -76,11 +76,12 @@ class ProductoController(Resource):
             productoEncontrado.fecha = data.get('fecha')
             productoEncontrado.cod_patrimonial = data.get('cod_patrimonial')
             productoEncontrado.categoriaId = data.get('categoriaId')
-
+            
             conexion.session.commit()
 
             return {
                 'message':'Producto actualizado exitosamente'
+
             }
 
         except Exception as error:
