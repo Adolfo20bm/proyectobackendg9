@@ -8,7 +8,7 @@ class ProductoModel(conexion.Model):
 
     id = Column(type_=types.Integer, autoincrement=True, primary_key=True)
     descripcion = Column(type_ = types.String(length=45), nullable=False)
-    unidad = Column(type_ = types.Integer, nullable=False)
+    unidad = Column(type_ = types.String(length=45), nullable=False)
     imagen = Column(type_=types.String(45))
     stock = Column(type_ = types.Integer, nullable=False)
     entregas = Column(type_ = types.Integer, nullable=False)
